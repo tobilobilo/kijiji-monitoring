@@ -1,4 +1,5 @@
 import Category from "./Category";
+import AddFeed from "./AddFeed";
 import Button from "./Button";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
@@ -16,23 +17,16 @@ const Settings = ({ menuState }: Menu) => {
 
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="overflow-hidden bg-zinc-300">
         <div
-          className={`centering grid bg-zinc-300 transition-all duration-500 ${
+          className={`centering grid transition-all duration-500 ${
             menuState ? "grid-rows-1" : "grid-rows-0"
           }`}
         >
           <div className="mx-auto w-full max-w-4xl pb-3 md:pb-4">
-            <div className="pt-3 md:pt-4">
-              <input
-                type="text"
-                className="block w-full rounded-full bg-zinc-50 px-3 py-1 text-sm shadow-sm md:px-4 md:py-3"
-                placeholder="RSS url du feed kijiji"
-              />
-              <button className="search-field-add hidden">Ajouter</button>
-            </div>
+            <AddFeed />
             <div className="flex items-start pt-3 md:pt-4">
-              <div className="me-3 border-r border-zinc-400 pe-3 md:me-4 md:pe-4">
+              <div className="me-3 border-r border-zinc-400/30 pe-3 md:me-4 md:pe-4">
                 <div
                   className="relative flex h-8 items-center justify-center overflow-hidden rounded-full bg-red-650 px-4 text-sm shadow-sm"
                   aria-label="Basculer toutes les catégories"
@@ -56,7 +50,7 @@ const Settings = ({ menuState }: Menu) => {
                 <Category />
               </div>
             </div>
-            <div className="mt-3 flex flex-wrap gap-3 md:mt-6 md:gap-3">
+            <div className="mt-2 flex flex-wrap gap-3 border-t border-zinc-400/30 pt-2 md:mt-3 md:gap-3 md:pt-3">
               <Button
                 text="Rechercher"
                 icon={<MagnifyingGlassIcon className={iconsClasses} />}
