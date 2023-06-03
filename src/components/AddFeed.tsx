@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { removeSubstring } from "../utilis";
+import { writeLocalStorageFeed } from "../utilis";
 
 const AddFeed = () => {
   const [urlIsValid, setUrlIsValid] = useState(false);
@@ -11,6 +13,16 @@ const AddFeed = () => {
 
   function validateKijijiUrl(url: string) {
     return url.includes("kijiji.ca/rss"); // basic url validation
+  }
+
+  function addFeed() {
+    const urlBySections = removeSubstring("https://", url).split("/");
+    const feedKeyword = decodeURIComponent(urlBySections[3]);
+    const feedUrl = decodeURI(url)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    writeLocalStorageFeed(feedKeyword, feedUrl, true);
+    setUrl("");
   }
 
   return (
@@ -29,6 +41,7 @@ const AddFeed = () => {
           className={`rounded-e-full bg-red-650 px-4 text-sm text-white shadow-sm ${
             urlIsValid ? "" : "hidden"
           }`}
+          onClick={addFeed}
         >
           Ajouter
         </button>
