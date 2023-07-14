@@ -1,4 +1,4 @@
-import logo from "../assets/svg/k.svg";
+import logo from "../../assets/svg/k.svg";
 import Settings from "./Settings";
 import { useState } from "react";
 

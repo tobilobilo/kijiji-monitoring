@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Category from "./Category";
 import AddFeed from "./AddFeed";
-import Button from "./Button";
+import Button from "../Button";
+import CheckBox from "./CheckBox";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 
@@ -11,8 +13,11 @@ interface Menu {
 const Settings = ({ menuState }: Menu) => {
   const iconsClasses = "me-1 h-5 text-white font-bold";
 
-  function toggleCategories() {
-    console.log("categories toggle");
+  const [allCategories, setAllCategories] = useState(false);
+  const [automatic, setAutomatic] = useState(false);
+
+  function toggleCategories(str: string): void {
+    console.log("categories toggle ", str);
   }
 
   return (
@@ -27,24 +32,12 @@ const Settings = ({ menuState }: Menu) => {
             <AddFeed />
             <div className="flex items-start pt-3 md:pt-4">
               <div className="me-3 border-r border-zinc-400/30 pe-3 md:me-4 md:pe-4">
-                <div
-                  className="relative flex h-8 items-center justify-center overflow-hidden rounded-full bg-red-650 px-4 text-sm shadow-sm"
-                  aria-label="Basculer toutes les catégories"
-                >
-                  <input
-                    id="toggle-all"
-                    onChange={toggleCategories}
-                    type="checkbox"
-                    className="cursor-pointer"
-                  />
-                  <label
-                    htmlFor="toggle-all"
-                    className="absolute left-0 top-0 block h-full w-full cursor-pointer"
-                    aria-hidden="true"
-                  >
-                    &nbsp;
-                  </label>
-                </div>
+                <CheckBox
+                  id="toogle"
+                  state={allCategories}
+                  onChange={() => setAllCategories(!allCategories)}
+                  ariaLabel="Basculer toutes les catégories"
+                />
               </div>
               <div className="checkboxes" id="checkboxes">
                 <Category />
@@ -60,16 +53,12 @@ const Settings = ({ menuState }: Menu) => {
                 extraClasses="ms-auto"
                 icon={<ArrowUpTrayIcon className={iconsClasses} />}
               />
-              <div className="relative flex h-8 items-center justify-center overflow-hidden rounded-full bg-red-650 px-4 text-sm text-white shadow-sm">
-                <input
-                  className="cursor-pointer"
-                  type="checkbox"
-                  id="is-auto"
-                />
-                <label className="ms-3 cursor-pointer" htmlFor="is-auto">
-                  Auto
-                </label>
-              </div>
+              <CheckBox
+                id="automaat"
+                state={automatic}
+                onChange={() => setAutomatic(!automatic)}
+                text="Auto"
+              />
             </div>
           </div>
         </div>

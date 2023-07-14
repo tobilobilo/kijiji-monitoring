@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { removeSubstring } from "../utils/string";
-import { writeLocalStorageFeed } from "../utils/storage";
+import { removeSubstring } from "../../utils/string";
+import { writeLocalStorageFeed } from "../../utils/storage";
 
 const AddFeed = () => {
   const [urlIsValid, setUrlIsValid] = useState(false);

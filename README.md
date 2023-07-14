@@ -1,21 +1,33 @@
-# kijiji-monitoring
+# Kijiji Monitoring
 
-### Installation - Installing
+Kijiji Monitoring récupère des flux rss de kijiji et les affiche dans une vue dynamique, capte toutes les nouvelles annonces en temps réel et les ajoute à la vue.
 
-- Cloner le projet
+## Installation
 
-```
-git clone https://github.com/tobilobilo/kijiji-monitoring.git
-```
+Installer Kijiji Monitoring
 
-```
+```bash
 npm install
 ```
 
-### Exécution du programme - Executing program
+## Lancer l'application
 
-- Watch sur Tailwind
+Générer les styles avec Tailwind, le watch est facultatif
 
+```bash
+npx tailwindcss -i ./src/assets/css/main.css -o ./dist/output.css --watch
 ```
-npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
+
+Démarer le projet
+
+```bash
+npm run dev
 ```
+
+## Auteur
+
+Jean-Pierre Rose
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
