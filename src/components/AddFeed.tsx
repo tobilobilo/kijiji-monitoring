@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { removeSubstring } from "../utilis";
-import { writeLocalStorageFeed } from "../utilis";
+import { removeSubstring } from "../utils/string";
+import { writeLocalStorageFeed } from "../utils/storage";
 
 const AddFeed = () => {
   const [urlIsValid, setUrlIsValid] = useState(false);
@@ -30,7 +30,7 @@ const AddFeed = () => {
       <div className="flex pt-3 md:pt-4">
         <input
           type="text"
-          className={`block w-full rounded-s-full bg-zinc-50 px-3 py-1 text-sm shadow-sm md:px-4 md:py-3 ${
+          className={`block w-full rounded-s-full bg-zinc-50 px-3 py-1 text-sm shadow-sm outline-red-650 md:px-4 md:py-3 ${
             urlIsValid ? "rounded-e-none" : "rounded-e-full"
           }`}
           placeholder="Ajouter un feed RSS Kijiji"
