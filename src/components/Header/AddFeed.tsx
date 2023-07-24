@@ -3,12 +3,12 @@ import { removeSubstring } from "../../utils/string";
 import { writeLocalStorageFeed } from "../../utils/storage";
 
 const AddFeed = () => {
-  const [urlIsValid, setUrlIsValid] = useState(false);
+  const [isValidUrl, setIsValidUrl] = useState(false);
   const [url, setUrl] = useState("");
 
   function inputChange(inputValue: string) {
     setUrl(inputValue);
-    setUrlIsValid(validateKijijiUrl(inputValue));
+    setIsValidUrl(validateKijijiUrl(inputValue));
   }
 
   function validateKijijiUrl(url: string) {
@@ -31,7 +31,7 @@ const AddFeed = () => {
         <input
           type="text"
           className={`block w-full rounded-s-full bg-zinc-50 px-3 py-1 text-sm shadow-sm outline-red-650 md:px-4 md:py-3 ${
-            urlIsValid ? "rounded-e-none" : "rounded-e-full"
+            isValidUrl ? "rounded-e-none" : "rounded-e-full"
           }`}
           placeholder="Ajouter un feed RSS Kijiji"
           value={url}
@@ -39,14 +39,14 @@ const AddFeed = () => {
         />
         <button
           className={`rounded-e-full bg-red-650 px-4 text-sm text-white shadow-sm ${
-            urlIsValid ? "" : "hidden"
+            isValidUrl ? "" : "hidden"
           }`}
           onClick={addFeed}
         >
           Ajouter
         </button>
       </div>
-      {!urlIsValid && url !== "" && (
+      {!isValidUrl && url !== "" && (
         <span className="block px-3 py-1 text-xs text-red-650 md:px-4">
           Entrez une url Kijiji valide
         </span>

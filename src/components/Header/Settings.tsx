@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Category from "./Category";
+import Categories from "./Categories";
 import AddFeed from "./AddFeed";
 import Button from "../Button";
 import CheckBox from "./CheckBox";
@@ -15,10 +15,6 @@ const Settings = ({ menuState }: Menu) => {
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
-
-  function toggleCategories(str: string): void {
-    console.log("categories toggle ", str);
-  }
 
   return (
     <>
@@ -39,9 +35,7 @@ const Settings = ({ menuState }: Menu) => {
                   ariaLabel="Basculer toutes les catégories"
                 />
               </div>
-              <div className="checkboxes" id="checkboxes">
-                <Category />
-              </div>
+              <Categories />
             </div>
             <div className="mt-2 flex flex-wrap gap-3 border-t border-zinc-400/30 pt-2 md:mt-3 md:gap-3 md:pt-3">
               <Button
@@ -61,6 +55,9 @@ const Settings = ({ menuState }: Menu) => {
               />
             </div>
           </div>
+        </div>
+        <div className="h-1 bg-white">
+          <div className="h-full w-1/2 bg-red-650">&nbsp;</div>
         </div>
       </div>
     </>
