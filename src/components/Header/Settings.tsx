@@ -5,6 +5,7 @@ import Button from "../Button";
 import CheckBox from "./CheckBox";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
+import config from "../../config";
 
 interface Menu {
   menuState: boolean;
@@ -15,6 +16,11 @@ const Settings = ({ menuState }: Menu) => {
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
+
+  const automaticAnimationClass = automatic ? "animate-automatic" : "";
+  const automaticAnimationDelay = {
+    animationDuration: config.AUTOMATIC_TIMER + "s",
+  };
 
   return (
     <>
@@ -56,8 +62,13 @@ const Settings = ({ menuState }: Menu) => {
             </div>
           </div>
         </div>
-        <div className="h-1 bg-white">
-          <div className="h-full w-1/2 bg-red-650">&nbsp;</div>
+        <div className="h-0.5 bg-white">
+          <div
+            className={`h-full w-0 bg-red-650/90 ${automaticAnimationClass}`}
+            style={automaticAnimationDelay}
+          >
+            &nbsp;
+          </div>
         </div>
       </div>
     </>

@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'body': ['Poppins', 'sans-serif']
+        
       },
       colors: {
         'red': {
@@ -14,6 +14,15 @@ module.exports = {
       gridTemplateRows: {
         '0': 'repeat(1, minmax(0, 0fr))',
       },
+      keyframes: {
+        automaticTimer: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        }
+      },
+      animation: {
+        automatic: 'automaticTimer linear 1',
+      }
     },
   },
   plugins: [],

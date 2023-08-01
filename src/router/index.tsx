@@ -11,9 +11,9 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<App />} errorElement={<ErrorBoundary />} />
       <Route
-        path="/profile/:profileName"
+        path="/profil/:profileName"
         element={<App loadProfile={true} />}
-        errorElement={<ErrorBoundary text={"Profile introuvable"} />}
+        errorElement={<ErrorBoundary text={"Profil introuvable"} />}
       />
     </>
   )

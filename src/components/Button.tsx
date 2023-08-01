@@ -7,7 +7,7 @@ interface Button {
   icon?: ReactElement;
 }
 
-const Button = ({ text, extraClasses, icon, onClick }: Button) => {
+const Button = ({ text, extraClasses = "", icon, onClick }: Button) => {
   return (
     <button
       type="button"

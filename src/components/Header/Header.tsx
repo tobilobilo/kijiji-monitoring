@@ -3,11 +3,10 @@ import Settings from "./Settings";
 import { useState } from "react";
 
 interface Header {
-  profile?: string;
   simpleHeader?: boolean;
 }
 
-function Header({ profile, simpleHeader = false }: Header) {
+function Header({ simpleHeader = false }: Header) {
   const [menuOpened, setMenuOpened] = useState(false);
 
   function toggleSettings() {
@@ -24,7 +23,7 @@ function Header({ profile, simpleHeader = false }: Header) {
                 <img src={logo} alt="Logo" className="block w-3" />
               </span>
               <h1 className="flex items-center text-xl font-medium text-white">
-                Kijiji Monitoring - {profile}
+                Kijiji Monitoring
               </h1>
             </div>
             {!simpleHeader && (
