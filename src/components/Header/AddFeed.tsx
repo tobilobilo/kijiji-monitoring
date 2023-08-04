@@ -30,7 +30,7 @@ const AddFeed = () => {
       <div className="flex pt-3 md:pt-4">
         <input
           type="text"
-          className={`block w-full rounded-s-full bg-zinc-50 px-3 py-1 text-sm shadow-sm outline-red-650 md:px-4 md:py-3 ${
+          className={`block h-8 w-full rounded-s-full bg-zinc-50 px-3 py-1 text-sm shadow-sm outline-red-650 md:h-10 md:px-4 md:py-3 ${
             isValidUrl ? "rounded-e-none" : "rounded-e-full"
           }`}
           placeholder="Ajouter un feed RSS Kijiji"

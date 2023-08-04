@@ -1,8 +1,9 @@
 import { create } from "zustand";
-import { Profile } from "../interfaces";
+import { Profile, Feed } from "../interfaces";
 
 interface ProfileStore extends Profile {
     updateProfile: () => void;
+    setFeeds: (feeds:Array<Feed>) => void;
     loadProfile: (profile:Profile) => void;
 }
 
@@ -13,9 +14,14 @@ export const useProfileStore = create<ProfileStore>((set) => ({
     loadProfile: (profile:Profile) => 
         set((state) => ({
             ...state,
-            feeds: [...profile.feeds, ],
+            feeds: [...profile.feeds],
             excludedTermsInDescription: [...profile.excludedTermsInDescription],
             excludedTermsInTitle: [...profile.excludedTermsInTitle],
+        })),
+    setFeeds: (feeds) => 
+        set((state) => ({
+            ...state,
+            feeds: [...feeds],
         })),
     updateProfile: () => 
         set((state) => ({

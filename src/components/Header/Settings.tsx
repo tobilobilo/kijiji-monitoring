@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Categories from "./Categories";
 import AddFeed from "./AddFeed";
 import Button from "../Button";
 import CheckBox from "./CheckBox";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
+import { useProfileStore } from "../../store";
 import config from "../../config";
 
 interface Menu {
@@ -22,6 +23,20 @@ const Settings = ({ menuState }: Menu) => {
     animationDuration: config.AUTOMATIC_TIMER + "s",
   };
 
+  const profileStore = useProfileStore();
+
+  function toggleAllCheckboxes() {
+    const newState = !allCategories;
+    const feeds = profileStore.feeds;
+    const newFeeds = feeds.map((f) => {
+      f.checked = newState;
+      return f;
+    });
+
+    setAllCategories(newState);
+    profileStore.setFeeds(newFeeds);
+  }
+
   return (
     <>
       <div className="overflow-hidden bg-zinc-300">
@@ -32,13 +47,14 @@ const Settings = ({ menuState }: Menu) => {
         >
           <div className="mx-auto w-full max-w-4xl pb-3 md:pb-4">
             <AddFeed />
-            <div className="flex items-start pt-3 md:pt-4">
-              <div className="me-3 border-r border-zinc-400/30 pe-3 md:me-4 md:pe-4">
+            <div className="flex flex-col items-start pt-3 sm:flex-row md:pt-4">
+              <div className="mb-2 w-full border-b border-zinc-400/30 pb-2 sm:mb-0 sm:me-3 sm:w-auto sm:border-b-0 sm:border-r sm:pb-0 sm:pe-3 md:me-4 md:pe-4">
                 <CheckBox
                   id="toogle"
                   state={allCategories}
-                  onChange={() => setAllCategories(!allCategories)}
+                  onChange={toggleAllCheckboxes}
                   ariaLabel="Basculer toutes les catégories"
+                  extraClasses="w-full"
                 />
               </div>
               <Categories />

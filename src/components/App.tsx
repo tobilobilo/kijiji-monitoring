@@ -32,7 +32,7 @@ function App({ loadProfile = false }: App) {
     })
       .then((response) => response.json())
       .then((response) => {
-        //console.log(response.feeds);
+        console.log(response.feeds);
         profileStore.loadProfile(response);
       })
       .catch((error) => {
@@ -42,22 +42,12 @@ function App({ loadProfile = false }: App) {
   }
 
   useEffect(() => {
-    //searchProfile();
+    searchProfile();
   }, []);
 
   return (
     <>
       <Header />
-      {/*categoriesProfile && categoriesProfile.feeds.forEach(element => {
-        
-      });*/}
-      <div>
-        {useProfileStore((state) => state.feeds.map((feed) => feed.keyword))}
-        <button onClick={searchProfile}>Load Profile</button>
-        <button onClick={useProfileStore((state) => state.updateProfile)}>
-          Update Profile
-        </button>
-      </div>
     </>
   );
 }

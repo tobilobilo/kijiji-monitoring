@@ -5,6 +5,7 @@ interface CheckBox {
   ariaLabel?: string;
   text?: string;
   style?: "button" | "category";
+  extraClasses?: string;
 }
 
 const styles = {
@@ -19,13 +20,14 @@ const CheckBox = ({
   ariaLabel,
   text,
   style = "button",
+  extraClasses,
 }: CheckBox) => {
   return (
     <>
       <label
         aria-label={ariaLabel}
         htmlFor={id}
-        className={`relative flex h-8 cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full px-4 text-sm shadow-sm transition duration-200 hover:brightness-90 ${styles[style]}`}
+        className={`relative flex h-8 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-4 text-sm shadow-sm transition duration-200 hover:brightness-90 sm:gap-3 ${styles[style]} ${extraClasses}`}
         aria-hidden="true"
       >
         <input
