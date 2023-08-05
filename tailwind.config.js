@@ -4,11 +4,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        
+        'inter': ['Inter', 'sans-serif'],
       },
       colors: {
         'red': {
           650: '#d60d0d',
+        },
+        'zinc': {
+          350: '#b7b7b7'
         }
       },
       gridTemplateRows: {

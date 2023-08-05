@@ -3,17 +3,18 @@ import Categories from "./Categories";
 import AddFeed from "./AddFeed";
 import Button from "../Button";
 import CheckBox from "./CheckBox";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import { useProfileStore } from "../../store";
 import config from "../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortAmountUpAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 interface Menu {
   menuState: boolean;
 }
 
 const Settings = ({ menuState }: Menu) => {
-  const iconsClasses = "me-1 h-5 text-white font-bold";
+  const iconsClasses = "me-1 h-4 text-white";
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
@@ -39,7 +40,7 @@ const Settings = ({ menuState }: Menu) => {
 
   return (
     <>
-      <div className="overflow-hidden bg-zinc-300">
+      <div className="overflow-hidden shadow-md">
         <div
           className={`centering grid transition-all duration-500 ${
             menuState ? "grid-rows-1" : "grid-rows-0"
@@ -47,27 +48,34 @@ const Settings = ({ menuState }: Menu) => {
         >
           <div className="mx-auto w-full max-w-4xl pb-3 md:pb-4">
             <AddFeed />
-            <div className="flex flex-col items-start pt-3 sm:flex-row md:pt-4">
-              <div className="mb-2 w-full border-b border-zinc-400/30 pb-2 sm:mb-0 sm:me-3 sm:w-auto sm:border-b-0 sm:border-r sm:pb-0 sm:pe-3 md:me-4 md:pe-4">
-                <CheckBox
-                  id="toogle"
-                  state={allCategories}
-                  onChange={toggleAllCheckboxes}
-                  ariaLabel="Basculer toutes les catégories"
-                  extraClasses="w-full"
-                />
-              </div>
+            <div
+              className="checkboxes flex flex-wrap justify-center gap-2 pt-3 sm:gap-3 md:pt-4"
+              id="checkboxes"
+            >
+              <CheckBox
+                id="toogle"
+                state={allCategories}
+                onChange={toggleAllCheckboxes}
+                text={allCategories ? "Tout cocher" : "Tout décocher"}
+              />
               <Categories />
             </div>
-            <div className="mt-2 flex flex-wrap gap-3 border-t border-zinc-400/30 pt-2 md:mt-3 md:gap-3 md:pt-3">
+            <div className="mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
               <Button
                 text="Rechercher"
-                icon={<MagnifyingGlassIcon className={iconsClasses} />}
+                icon={
+                  <FontAwesomeIcon icon={faSearch} className={iconsClasses} />
+                }
               />
               <Button
                 text="Trier"
                 extraClasses="ms-auto"
-                icon={<ArrowUpTrayIcon className={iconsClasses} />}
+                icon={
+                  <FontAwesomeIcon
+                    icon={faSortAmountUpAlt}
+                    className={iconsClasses}
+                  />
+                }
               />
               <CheckBox
                 id="automaat"

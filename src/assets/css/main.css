@@ -1,10 +1,17 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer utilities {
+    body {
+        @apply font-inter font-normal text-zinc-600
+    }
     .centering {
         @apply mx-auto max-w-[1800px] px-3 md:px-4
+    }
+    .custom_checkbox:focus-visible + svg {
+        @apply outline outline-offset-2 outline-1
     }
 }

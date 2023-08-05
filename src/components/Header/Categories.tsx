@@ -14,10 +14,7 @@ const Category = () => {
   }
 
   return (
-    <div
-      className="checkboxes flex flex-wrap justify-center gap-2 sm:gap-3"
-      id="checkboxes"
-    >
+    <>
       {useProfileStore((state) =>
         state.feeds.map((feed: Feed, index) => (
           <CheckBox
@@ -32,7 +29,7 @@ const Category = () => {
           />
         ))
       )}
-    </div>
+    </>
   );
 };
 
