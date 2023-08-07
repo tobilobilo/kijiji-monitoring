@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { removeSubstring } from "../../utils/string";
-import { writeLocalStorageFeed } from "../../utils/storage";
+import { writeLocalStorageFeed, readLocalStorage } from "../../utils/storage";
+import { Feed } from "../../interfaces";
+import { useProfileStore } from "../../store";
 
 const AddFeed = () => {
   const [isValidUrl, setIsValidUrl] = useState(false);
   const [url, setUrl] = useState("");
+  const profileStore = useProfileStore();
 
   function inputChange(inputValue: string) {
     setUrl(inputValue);
@@ -17,12 +20,28 @@ const AddFeed = () => {
 
   function addFeed() {
     const urlBySections = removeSubstring("https://", url).split("/");
-    const feedKeyword = decodeURIComponent(urlBySections[3]);
+    const feedKeyword = decodeURIComponent(urlBySections[2]);
     const feedUrl = decodeURI(url)
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    writeLocalStorageFeed(feedKeyword, feedUrl, true);
     setUrl("");
+    setIsValidUrl(false);
+
+    const feedsInStorage = readLocalStorage("CUSTOM_FEEDS");
+    if (
+      feedsInStorage &&
+      JSON.parse(feedsInStorage).some((feed: Feed) => feed.url === feedUrl)
+    )
+      return;
+    if (!validateKijijiUrl(feedUrl)) return;
+
+    const feed: Feed = {
+      keyword: feedKeyword,
+      url: feedUrl,
+      checked: true,
+    };
+    writeLocalStorageFeed(feed);
+    profileStore.addFeed(feed);
   }
 
   return (
@@ -38,7 +57,7 @@ const AddFeed = () => {
           onChange={(e) => inputChange(e.target.value)}
         />
         <button
-          className={`rounded-e-full bg-red-650 px-4 text-sm text-white shadow-sm ${
+          className={`rounded-e-md bg-red-650 px-4 text-sm text-white shadow-sm ${
             isValidUrl ? "" : "hidden"
           }`}
           onClick={addFeed}

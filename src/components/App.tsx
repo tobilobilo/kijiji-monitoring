@@ -32,11 +32,9 @@ function App({ loadProfile = false }: App) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.feeds);
         profileStore.loadProfile(response);
       })
       .catch((error) => {
-        console.log(error);
         setErrorLoadingProfile(error);
       });
   }

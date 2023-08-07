@@ -15,6 +15,7 @@ interface Menu {
 
 const Settings = ({ menuState }: Menu) => {
   const iconsClasses = "me-1 h-4 text-white";
+  const profileStore = useProfileStore();
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
@@ -23,8 +24,6 @@ const Settings = ({ menuState }: Menu) => {
   const automaticAnimationDelay = {
     animationDuration: config.AUTOMATIC_TIMER + "s",
   };
-
-  const profileStore = useProfileStore();
 
   function toggleAllCheckboxes() {
     const newState = !allCategories;
@@ -38,6 +37,17 @@ const Settings = ({ menuState }: Menu) => {
     profileStore.setFeeds(newFeeds);
   }
 
+  function search() {
+    console.log("ef");
+    //const RSS_URL = "/src/data/mocks/k0l1700278.rss";
+    const RSS_URL =
+      "https://www.kijiji.ca/rss-srp-laval-rive-nord/xbox-360/k0l1700278?dc=true&sort=dateDesc";
+    fetch(RSS_URL)
+      .then((response) => response.text())
+      .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
+      .then((data) => console.log(data));
+  }
+
   return (
     <>
       <div className="overflow-hidden shadow-md">
@@ -49,14 +59,14 @@ const Settings = ({ menuState }: Menu) => {
           <div className="mx-auto w-full max-w-4xl pb-3 md:pb-4">
             <AddFeed />
             <div
-              className="checkboxes flex flex-wrap justify-center gap-2 pt-3 sm:gap-3 md:pt-4"
+              className="checkboxes space-between justify-left flex flex-wrap gap-2 pt-3 sm:gap-3 md:pt-4"
               id="checkboxes"
             >
               <CheckBox
                 id="toogle"
                 state={allCategories}
                 onChange={toggleAllCheckboxes}
-                text={allCategories ? "Tout cocher" : "Tout décocher"}
+                ariaLabel={allCategories ? "Tout cocher" : "Tout décocher"}
               />
               <Categories />
             </div>
@@ -66,6 +76,7 @@ const Settings = ({ menuState }: Menu) => {
                 icon={
                   <FontAwesomeIcon icon={faSearch} className={iconsClasses} />
                 }
+                onClick={search}
               />
               <Button
                 text="Trier"

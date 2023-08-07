@@ -13,7 +13,7 @@ interface CheckBox {
 }
 
 const styles = {
-  button: "bg-red-650 text-white border-transparent hover:bg-red-700",
+  button: "bg-red-650 text-red-50 border-transparent hover:bg-red-700",
   category: "bg-white border-zinc-200 hover:bg-zinc-100",
 };
 
