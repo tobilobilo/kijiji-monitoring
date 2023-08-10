@@ -1,13 +1,18 @@
 {
   "name": "kijiji-monitoring",
   "private": true,
+  "homepage": "/kijiji-monitoring/#",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "tsc": "tsc",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "tww": "npx tailwindcss -i ./src/assets/css/main.css -o ./dist.dev/output.css --watch"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -31,6 +36,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwindcss": "^3.3.2",

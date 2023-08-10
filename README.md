@@ -12,16 +12,16 @@ npm install
 
 ## Lancer l'application
 
-Générer les styles avec Tailwind, le watch est facultatif
-
-```bash
-npx tailwindcss -i ./src/assets/css/main.css -o ./dist/output.css --watch
-```
-
-Démarer le projet
+Démarrer le projet
 
 ```bash
 npm run dev
+```
+
+Générer les styles avec Tailwind + watch
+
+```bash
+npm run tww
 ```
 
 ## Auteur

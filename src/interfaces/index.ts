@@ -9,3 +9,14 @@ export interface Profile {
     excludedTermsInTitle: Array<string>;
     excludedTermsInDescription: Array<string>;
 }
+
+export interface Add {
+    id: string,
+    title: string,
+    description?: string,
+    pubDate: string,
+    link: string,
+    thumbnail?: string,
+    category: string,
+    price?: string,
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Categories from "./Categories";
 import AddFeed from "./AddFeed";
 import Button from "../Button";
@@ -8,6 +8,8 @@ import config from "../../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountUpAlt } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import FetchAdds from "../../services/FetchAdds";
 
 interface Menu {
   menuState: boolean;
@@ -19,6 +21,7 @@ const Settings = ({ menuState }: Menu) => {
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const automaticAnimationClass = automatic ? "animate-automatic" : "";
   const automaticAnimationDelay = {
@@ -38,14 +41,13 @@ const Settings = ({ menuState }: Menu) => {
   }
 
   function search() {
-    console.log("ef");
-    //const RSS_URL = "/src/data/mocks/k0l1700278.rss";
-    const RSS_URL =
-      "https://www.kijiji.ca/rss-srp-laval-rive-nord/xbox-360/k0l1700278?dc=true&sort=dateDesc";
-    fetch(RSS_URL)
-      .then((response) => response.text())
-      .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
-      .then((data) => console.log(data));
+    setLoading(true);
+    FetchAdds({
+      feeds: profileStore.feeds.filter((f) => f.checked === true),
+      excludedTermsInDescription: profileStore.excludedTermsInDescription,
+      excludedTermsInTitle: profileStore.excludedTermsInTitle,
+    });
+    setTimeout(() => setLoading(false), 3000);
   }
 
   return (
@@ -105,6 +107,15 @@ const Settings = ({ menuState }: Menu) => {
             &nbsp;
           </div>
         </div>
+      </div>
+      <div className="flex h-10 items-center justify-center md:h-14">
+        {loading && (
+          <FontAwesomeIcon
+            icon={faCircleNotch}
+            spin
+            className="h-6 text-red-650 md:h-8"
+          />
+        )}
       </div>
     </>
   );

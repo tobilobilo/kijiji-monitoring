@@ -1,12 +1,12 @@
 import {
-  createBrowserRouter,
+  createHashRouter, // normalement j'utiliserais createBrowserRouter, mais non possible sur github pages
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
 import ErrorBoundary from "../components/ErrorBoundary.tsx";
 import App from "../components/App.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} errorElement={<ErrorBoundary />} />
