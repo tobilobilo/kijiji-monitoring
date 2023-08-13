@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountUpAlt } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import FetchAdds from "../../services/FetchAdds";
+import FetchAds from "../../services/FetchAds";
 
 interface Menu {
   menuState: boolean;
@@ -42,7 +42,7 @@ const Settings = ({ menuState }: Menu) => {
 
   function search() {
     setLoading(true);
-    FetchAdds({
+    FetchAds({
       feeds: profileStore.feeds.filter((f) => f.checked === true),
       excludedTermsInDescription: profileStore.excludedTermsInDescription,
       excludedTermsInTitle: profileStore.excludedTermsInTitle,

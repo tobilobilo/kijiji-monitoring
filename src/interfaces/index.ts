@@ -10,13 +10,19 @@ export interface Profile {
     excludedTermsInDescription: Array<string>;
 }
 
-export interface Add {
-    id: string,
-    title: string,
+export type AdsParser = {
+    fetchedData: string;
+    category: string;
+    excludedTermsInTitle: Array<string>;
+    excludedTermsInDescription: Array<string>;
+}
+
+export interface Ad {
+    title?: string,
     description?: string,
-    pubDate: string,
-    link: string,
+    date?: string,
+    link?: string,
     thumbnail?: string,
-    category: string,
+    category?: string,
     price?: string,
 }

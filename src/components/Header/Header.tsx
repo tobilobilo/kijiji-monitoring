@@ -7,7 +7,7 @@ interface Header {
 }
 
 function Header({ simpleHeader = false }: Header) {
-  const [menuOpened, setMenuOpened] = useState(false);
+  const [menuOpened, setMenuOpened] = useState(true);
 
   function toggleSettings() {
     setMenuOpened(!menuOpened);
