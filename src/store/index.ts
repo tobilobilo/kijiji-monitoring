@@ -1,11 +1,18 @@
 import { create } from "zustand";
-import { Profile, Feed } from "../interfaces";
+import { Profile, Feed, Ad } from "../interfaces";
 import { readLocalStorage } from "../utils/storage";
 
 interface ProfileStore extends Profile {
     loadProfile: (profile:Profile) => void;
     setFeeds: (feeds:Array<Feed>) => void;
     addFeed: (feed:Feed) => void;
+}
+
+interface AdsStore {
+    ads: Array<Ad>,
+    urls: Array<string>,
+    registerAds: (ads:Array<Ad>) => void;
+    registerUrls: (urls:Array<string>) => void;
 }
 
 const customFeeds = readLocalStorage("CUSTOM_FEEDS");
@@ -33,3 +40,20 @@ export const useProfileStore = create<ProfileStore>((set) => ({
             feeds: [...state.feeds, feed],
         })),
 }))
+
+export const useAdsStore = create<AdsStore>((set) => ({
+    ads: [],
+    urls: [],
+    registerAds: (ads) => 
+        set((state) => ({
+            ...state,
+            ads: [...state.ads, ...ads],
+        })),
+    registerUrls: (urls) => 
+        set((state) => ({
+            ...state,
+            urls: [...state.urls, ...urls],
+        }))
+}))
+
+

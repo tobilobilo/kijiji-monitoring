@@ -36,8 +36,8 @@ const AddFeed = () => {
     if (!validateKijijiUrl(feedUrl)) return;
 
     const feed: Feed = {
-      url: feedUrl,
       keyword: feedKeyword,
+      url: feedUrl,
       checked: true,
     };
     writeLocalStorageFeed(feed);

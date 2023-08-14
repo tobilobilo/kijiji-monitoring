@@ -7,9 +7,8 @@ import { useProfileStore } from "../../store";
 import config from "../../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortAmountUpAlt } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
-import FetchAds from "../../services/FetchAds";
+import Search from "./Search";
 
 interface Menu {
   menuState: boolean;
@@ -40,16 +39,6 @@ const Settings = ({ menuState }: Menu) => {
     profileStore.setFeeds(newFeeds);
   }
 
-  function search() {
-    setLoading(true);
-    FetchAds({
-      feeds: profileStore.feeds.filter((f) => f.checked === true),
-      excludedTermsInDescription: profileStore.excludedTermsInDescription,
-      excludedTermsInTitle: profileStore.excludedTermsInTitle,
-    });
-    setTimeout(() => setLoading(false), 3000);
-  }
-
   return (
     <>
       <div className="overflow-hidden shadow-md">
@@ -73,13 +62,7 @@ const Settings = ({ menuState }: Menu) => {
               <Categories />
             </div>
             <div className="mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
-              <Button
-                text="Rechercher"
-                icon={
-                  <FontAwesomeIcon icon={faSearch} className={iconsClasses} />
-                }
-                onClick={search}
-              />
+              <Search iconsClasses={iconsClasses} setLoading={setLoading} />
               <Button
                 text="Trier"
                 extraClasses="ms-auto"
