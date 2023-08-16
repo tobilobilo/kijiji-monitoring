@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./Header/Header";
+import Footer from "./Footer";
 import Ads from "./Main/Ads";
 import { useParams } from "react-router-dom";
 import config from "../config";
@@ -47,6 +48,7 @@ function App({ loadProfile = false }: App) {
     <>
       <Header />
       <Ads />
+      <Footer />
     </>
   );
 }
