@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="py-6 text-center text-sm">
-      Jean-Pierre Rose - 2023
+      <span className="font-bold">Jean-Pierre Rose</span> | 2023
     </footer>
   );
 };
