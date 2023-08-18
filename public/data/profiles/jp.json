@@ -40,6 +40,6 @@
       "checked": false
     }
   ],
-  "excludedTermsInTitle": ["iphone","macbook","&#11088;"],
+  "excludedTermsInTitle": ["iphone","macbook","&#11088;", "#9733;"],
   "excludedTermsInDescription": ["jeuxvideohobby", "videogameshobby", "metropolitain", "&#11088;"]
 }
