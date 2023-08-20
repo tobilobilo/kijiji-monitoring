@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Categories from "./Categories";
 import AddFeed from "./AddFeed";
 import Button from "../Button";
@@ -20,9 +20,12 @@ const Settings = ({ menuState }: Menu) => {
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
+  const [countdown, setCountdown] = useState<any>(false);
   const [loading, setLoading] = useState(false);
+  const [triggerSearch, setTriggerSearch] = useState(0);
 
-  const automaticAnimationClass = automatic ? "animate-automatic" : "";
+  const automaticAnimationClass =
+    automatic && !loading ? "animate-automatic" : "";
   const automaticAnimationDelay = {
     animationDuration: config.AUTOMATIC_TIMER + "s",
   };
@@ -30,14 +33,37 @@ const Settings = ({ menuState }: Menu) => {
   function toggleAllCheckboxes() {
     const newState = !allCategories;
     const feeds = profileStore.feeds;
-    const newFeeds = feeds.map((f) => {
-      f.checked = newState;
-      return f;
+    const newFeeds = feeds.map((feed) => {
+      feed.checked = newState;
+      return feed;
     });
 
     setAllCategories(newState);
     profileStore.setFeeds(newFeeds);
   }
+
+  function initCountdown() {
+    setCountdown(
+      setTimeout(() => {
+        setTriggerSearch((trigger) => trigger + 1);
+      }, config.AUTOMATIC_TIMER * 1000)
+    );
+  }
+
+  function cancelCountdown() {
+    clearTimeout(countdown);
+  }
+
+  useEffect(() => {
+    automatic ? initCountdown() : cancelCountdown();
+  }, [automatic]);
+
+  useEffect(() => {
+    if (!loading && automatic) {
+      cancelCountdown();
+      initCountdown();
+    }
+  }, [loading]);
 
   return (
     <>
@@ -62,7 +88,11 @@ const Settings = ({ menuState }: Menu) => {
               <Categories />
             </div>
             <div className="mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
-              <Search iconsClasses={iconsClasses} setLoading={setLoading} />
+              <Search
+                triggerSearch={triggerSearch}
+                iconsClasses={iconsClasses}
+                setLoading={setLoading}
+              />
               <Button
                 text="Trier"
                 extraClasses="ms-auto"

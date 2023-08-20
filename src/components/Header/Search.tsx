@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -10,17 +10,24 @@ import config from "../../config";
 interface Search {
   iconsClasses?: string;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  triggerSearch: number;
 }
 
-const Search = ({ iconsClasses, setLoading }: Search) => {
+const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
   const adsStore = useAdsStore();
   const profileStore = useProfileStore();
 
   const [searchBtnIsActive, setSearchBtnIsActive] = useState(true);
 
+  useEffect(() => {
+    if (triggerSearch) {
+      search();
+    }
+  }, [triggerSearch]);
+
   function disableSearchButton() {
     setSearchBtnIsActive(false);
-    setTimeout(() => setSearchBtnIsActive(true), 3000);
+    setTimeout(() => setSearchBtnIsActive(true), 5000);
   }
 
   function registerToStore(ads: Array<Ad>, urls: Array<string>): void {
@@ -82,23 +89,28 @@ const Search = ({ iconsClasses, setLoading }: Search) => {
   }
 
   function FetchAds(searchParams: Profile): void {
-    console.log(searchParams.feeds);
-    const feeds = [
-      {
-        checked: true,
-        keyword: "nintendo",
-        url: "data/mocks/k0c623l9001.rss",
-      },
-      {
-        checked: true,
-        keyword: "xbox 360",
-        url: "data/mocks/k0l1700278.rss",
-      },
-    ];
+    // start: Fake data testing
+    const fakeDataFeeds = true;
+    const fetchPrefix = fakeDataFeeds ? "" : config.CORS_PROXY;
+    const feeds = fakeDataFeeds
+      ? [
+          {
+            checked: true,
+            keyword: "nintendo",
+            url: "data/mocks/k0c623l9001.rss",
+          },
+          {
+            checked: true,
+            keyword: "xbox 360",
+            url: "data/mocks/k0l1700278.rss",
+          },
+        ]
+      : searchParams.feeds;
+    // end: Fake data testing
     const fetchPromisses: Promise<string | void>[] = [];
     feeds.map((feed) => {
       fetchPromisses.push(
-        fetch(feed.url, {})
+        fetch(fetchPrefix + feed.url, {})
           .then((response) => response.text())
           .then((data: string) => {
             parseAds({
@@ -112,34 +124,8 @@ const Search = ({ iconsClasses, setLoading }: Search) => {
       );
     });
     Promise.all(fetchPromisses).then((values) => {
-      console.log(values);
       setLoading(false);
     });
-
-    const RSS_URL = "data/mocks/k0l1700278.rss";
-    // const RSS_URL =
-    //    config.CORS_PROXY +
-    //    encodeURIComponent('https://www.kijiji.ca/rss-srp-laval-rive-nord/xbox-360/k0l1700278?dc=true&sort=dateDesc');
-    /*fetch(RSS_URL, {})
-      .then((response) => response.text())
-      .then((data: string) => {
-        parseAds({
-          fetchedData: data,
-          category: "tester",
-          excludedTermsInDescription: searchParams.excludedTermsInDescription,
-          excludedTermsInTitle: searchParams.excludedTermsInTitle,
-        });
-      });*/
-    /*const fetchExternalData = () => {
-      return Promise.all([
-        fetch("data/mocks/k0c623l9001.rss"),
-        fetch("data/mocks/k0l1700278.rss"),
-      ]).then((results) => Promise.all(results.map((result) => result.text())));
-    };
-    fetchExternalData().then((response) => {
-      console.log(response);
-      // [file1data, file2data]
-    });*/
   }
 
   function search() {

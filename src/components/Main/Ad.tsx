@@ -12,14 +12,13 @@ const Ad = ({ ad }: any) => {
       <a
         href={ad.link}
         target="_blank"
-        className="group flex gap-2 transition duration-300 ease-in-out hover:bg-zinc-100 hover:shadow-md sm:gap-3"
+        className="group flex max-h-48 gap-2 overflow-hidden transition duration-200 ease-in-out hover:scale-[1.05] hover:bg-zinc-100 hover:shadow-md sm:gap-3"
       >
         {ad.thumbnail && (
           <img
             src={ad.thumbnail}
             onError={onImageError}
-            width="100"
-            className="self-start"
+            className="block w-28 self-start"
           />
         )}
         <div className="overflow-hidden pr-1 pt-1">

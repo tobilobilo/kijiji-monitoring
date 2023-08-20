@@ -20,7 +20,7 @@ const Button = ({
       type="button"
       onClick={onClick}
       className={`relative flex h-7 items-center justify-center overflow-hidden rounded-full bg-red-650 px-4 text-xs text-red-50 shadow-sm transition duration-200 hover:brightness-90 md:h-8 md:text-sm ${extraClasses} ${
-        disabled ? "opacity-80" : ""
+        disabled ? "opacity-70" : ""
       }`}
       disabled={disabled}
     >
