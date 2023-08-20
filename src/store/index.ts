@@ -11,8 +11,10 @@ interface ProfileStore extends Profile {
 interface AdsStore {
     ads: Array<Ad>,
     urls: Array<string>,
+    sortType: number,
     registerAds: (ads:Array<Ad>) => void;
     registerUrls: (urls:Array<string>) => void;
+    setSortType: (type: number) => void;
 }
 
 const customFeeds = readLocalStorage("CUSTOM_FEEDS");
@@ -44,16 +46,22 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 export const useAdsStore = create<AdsStore>((set) => ({
     ads: [],
     urls: [],
+    sortType: 0,
     registerAds: (ads) => 
         set((state) => ({
             ...state,
-            ads: [...state.ads, ...ads],
+            ads: [...ads, ...state.ads],
         })),
     registerUrls: (urls) => 
         set((state) => ({
             ...state,
             urls: [...state.urls, ...urls],
-        }))
+        })),
+    setSortType: (type) => 
+        set((state) => ({
+            ...state,
+            sortType: type,
+        })),
 }))
 
 

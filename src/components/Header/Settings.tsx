@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import Categories from "./Categories";
 import AddFeed from "./AddFeed";
-import Button from "../Button";
 import CheckBox from "./CheckBox";
 import { useProfileStore } from "../../store";
 import config from "../../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortAmountUpAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import Search from "./Search";
+import Sort from "./Sort";
 
 interface Menu {
   menuState: boolean;
@@ -20,9 +19,11 @@ const Settings = ({ menuState }: Menu) => {
 
   const [allCategories, setAllCategories] = useState(false);
   const [automatic, setAutomatic] = useState(false);
-  const [countdown, setCountdown] = useState<any>(false);
   const [loading, setLoading] = useState(false);
   const [triggerSearch, setTriggerSearch] = useState(0);
+  const [countdown, setCountdown] = useState<
+    ReturnType<typeof setTimeout> | undefined
+  >();
 
   const automaticAnimationClass =
     automatic && !loading ? "animate-automatic" : "";
@@ -93,18 +94,10 @@ const Settings = ({ menuState }: Menu) => {
                 iconsClasses={iconsClasses}
                 setLoading={setLoading}
               />
-              <Button
-                text="Trier"
-                extraClasses="ms-auto"
-                icon={
-                  <FontAwesomeIcon
-                    icon={faSortAmountUpAlt}
-                    className={iconsClasses}
-                  />
-                }
-              />
+
+              <Sort iconsClasses={iconsClasses} />
               <CheckBox
-                id="automaat"
+                id="automatic"
                 state={automatic}
                 onChange={() => setAutomatic(!automatic)}
                 text="Auto"
