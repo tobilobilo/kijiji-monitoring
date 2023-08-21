@@ -10,10 +10,10 @@ interface ProfileStore extends Profile {
 
 interface AdsStore {
     ads: Array<Ad>,
-    urls: Array<string>,
+    ids: Array<string>,
     sortType: number,
     registerAds: (ads:Array<Ad>) => void;
-    registerUrls: (urls:Array<string>) => void;
+    registerIds: (ids:Array<string>) => void;
     setSortType: (type: number) => void;
 }
 
@@ -45,17 +45,17 @@ export const useProfileStore = create<ProfileStore>((set) => ({
 
 export const useAdsStore = create<AdsStore>((set) => ({
     ads: [],
-    urls: [],
+    ids: [],
     sortType: 0,
     registerAds: (ads) => 
         set((state) => ({
             ...state,
             ads: [...ads, ...state.ads],
         })),
-    registerUrls: (urls) => 
+    registerIds: (ids) => 
         set((state) => ({
             ...state,
-            urls: [...state.urls, ...urls],
+            ids: [...state.ids, ...ids],
         })),
     setSortType: (type) => 
         set((state) => ({

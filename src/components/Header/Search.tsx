@@ -30,9 +30,9 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     setTimeout(() => setSearchBtnIsActive(true), 5000);
   }
 
-  function registerToStore(ads: Array<Ad>, urls: Array<string>): void {
+  function registerToStore(ads: Array<Ad>, ids: Array<string>): void {
     adsStore.registerAds(ads);
-    adsStore.registerUrls(urls);
+    adsStore.registerIds(ids);
   }
 
   function parseAds(ads: AdsParser) {
@@ -44,13 +44,17 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     const kijijiAds = kijijiRSS.getElementsByTagName("item");
 
     const arrayAds: Array<Ad> = [];
-    const arrayUrls: Array<string> = [];
+    const arrayIds: Array<string> = [];
+    console.log(adsStore.ids);
     Array.from(kijijiAds).forEach((item) => {
       const link =
         item.getElementsByTagName("link")[0]?.childNodes[0]?.nodeValue;
 
-      if (link && adsStore.urls.includes(link)) return; // if the ad has already been registered, return
-      if (link) arrayUrls.push(link); // add url in the list even if the ad insn't registered at the end (eg. excluded because a banned terms has been found in the title or description)
+      if (link) {
+        const id = link.split("/").pop() || "";
+        if (adsStore.ids.includes(id)) return; // if the ad has already been registered, return
+        arrayIds.push(id); // add url in the list even if the ad insn't registered at the end (eg. excluded because a banned terms has been found in the title or description)
+      }
 
       const title =
         item.getElementsByTagName("title")[0]?.childNodes[0]?.nodeValue;
@@ -85,12 +89,12 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
       arrayAds.push(ad);
     });
 
-    registerToStore(arrayAds, arrayUrls);
+    registerToStore(arrayAds, arrayIds);
   }
 
   function FetchAds(searchParams: Profile): void {
     // start: Fake data testing
-    const fakeDataFeeds = true;
+    const fakeDataFeeds = false;
     const fetchPrefix = fakeDataFeeds ? "" : config.CORS_PROXY;
     const feeds = fakeDataFeeds
       ? [
