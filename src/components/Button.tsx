@@ -19,9 +19,9 @@ const Button = ({
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex h-7 items-center justify-center overflow-hidden rounded-full bg-red-650 px-4 text-xs text-red-50 shadow-sm transition duration-200 hover:brightness-90 md:h-8 md:text-sm ${extraClasses} ${
+      className={`relative flex h-7 items-center justify-center overflow-hidden bg-red-650 px-4 text-xs text-red-50 shadow-sm transition duration-200 hover:brightness-90 md:h-8 md:text-sm ${extraClasses} ${
         disabled ? "opacity-70" : ""
-      }`}
+      } ${extraClasses.includes("rounded-r-full") ? "" : "rounded-full"}`}
       disabled={disabled}
     >
       {icon} {text}

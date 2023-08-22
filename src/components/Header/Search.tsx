@@ -17,6 +17,9 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
   const adsStore = useAdsStore();
   const profileStore = useProfileStore();
 
+  const arrayAds: Array<Ad> = [];
+  const arrayIds: Array<string> = [];
+
   const [searchBtnIsActive, setSearchBtnIsActive] = useState(true);
 
   useEffect(() => {
@@ -43,25 +46,22 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     );
     const kijijiAds = kijijiRSS.getElementsByTagName("item");
 
-    const arrayAds: Array<Ad> = [];
-    const arrayIds: Array<string> = [];
-    console.log(adsStore.ids);
     Array.from(kijijiAds).forEach((item) => {
       const link =
         item.getElementsByTagName("link")[0]?.childNodes[0]?.nodeValue;
 
       if (link) {
         const id = link.split("/").pop() || "";
-        if (adsStore.ids.includes(id)) return; // if the ad has already been registered, return
+        if (adsStore.ids.includes(id) || arrayIds.includes(id)) return; // if the ad has already been registered or is to queue to be registered, return
         arrayIds.push(id); // add url in the list even if the ad insn't registered at the end (eg. excluded because a banned terms has been found in the title or description)
       }
 
       const title =
         item.getElementsByTagName("title")[0]?.childNodes[0]?.nodeValue;
+      if (title && containsTerms(title, ads.excludedTermsInTitle)) return;
+
       const description =
         item.getElementsByTagName("description")[0]?.childNodes[0]?.nodeValue;
-
-      if (title && containsTerms(title, ads.excludedTermsInTitle)) return;
       if (
         description &&
         containsTerms(description, ads.excludedTermsInDescription)
@@ -88,13 +88,11 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
 
       arrayAds.push(ad);
     });
-
-    registerToStore(arrayAds, arrayIds);
   }
 
   function FetchAds(searchParams: Profile): void {
     // start: Fake data testing
-    const fakeDataFeeds = false;
+    const fakeDataFeeds = true;
     const fetchPrefix = fakeDataFeeds ? "" : config.CORS_PROXY;
     const feeds = fakeDataFeeds
       ? [
@@ -129,6 +127,7 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     });
     Promise.all(fetchPromisses).then((values) => {
       setLoading(false);
+      registerToStore(arrayAds, arrayIds);
     });
   }
 

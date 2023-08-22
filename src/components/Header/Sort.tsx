@@ -9,7 +9,16 @@ interface Sort {
 
 const Sort = ({ iconsClasses }: Sort) => {
   const adsStore = useAdsStore();
-  const sortIcons = [faClock, faTag];
+  const sortIcons = [
+    {
+      icon: faClock,
+      label: "Plus récents",
+    },
+    {
+      icon: faTag,
+      label: "Par catégories",
+    },
+  ];
 
   function sort() {
     const cycleType = (adsStore.sortType += 1) > 1 ? 0 : adsStore.sortType;
@@ -17,17 +26,22 @@ const Sort = ({ iconsClasses }: Sort) => {
   }
 
   return (
-    <Button
-      text={`Trier`}
-      extraClasses="ms-auto"
-      onClick={sort}
-      icon={
-        <FontAwesomeIcon
-          icon={sortIcons[adsStore.sortType]}
-          className={iconsClasses}
-        />
-      }
-    />
+    <span className="ms-auto flex flex-row">
+      <span className="flex h-7 items-center justify-center rounded-l-lg border-r border-red-800 bg-red-650 px-3 text-xs text-red-50 shadow-sm md:h-8 md:text-sm">
+        Trier
+      </span>
+      <Button
+        text={sortIcons[adsStore.sortType].label}
+        extraClasses="rounded-r-full"
+        onClick={sort}
+        icon={
+          <FontAwesomeIcon
+            icon={sortIcons[adsStore.sortType].icon}
+            className={iconsClasses}
+          />
+        }
+      />
+    </span>
   );
 };
 

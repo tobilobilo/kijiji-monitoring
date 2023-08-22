@@ -14,7 +14,7 @@ interface Menu {
 }
 
 const Settings = ({ menuState }: Menu) => {
-  const iconsClasses = "me-1 h-4 text-white";
+  const iconsClasses = "me-2 h-4 text-white";
   const profileStore = useProfileStore();
 
   const [allCategories, setAllCategories] = useState(false);

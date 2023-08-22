@@ -12,17 +12,17 @@ const Ad = ({ ad }: any) => {
       <a
         href={ad.link}
         target="_blank"
-        className="group flex max-h-48 gap-2 overflow-hidden transition duration-200 ease-in-out hover:scale-[1.05] hover:bg-zinc-100 hover:shadow-md sm:gap-3"
+        className="group flex max-h-48 overflow-hidden transition duration-200 ease-in-out hover:scale-[1.05] hover:bg-zinc-100 hover:shadow-md"
       >
         {ad.thumbnail && (
           <img
             src={ad.thumbnail}
             onError={onImageError}
-            className="block w-28 self-start"
+            className="me-1 block w-28 self-start md:me-2"
           />
         )}
-        <div className="overflow-hidden pr-1 pt-1">
-          <div className="flex flex-row items-start">
+        <div className="overflow-hidden px-1 pt-1">
+          <div className="flex flex-row items-start gap-2">
             <div className="flex flex-row items-start sm:flex-col">
               {ad.category && (
                 <span className="rounded-full bg-zinc-200 px-3 py-0.5 text-xs font-bold">
@@ -39,7 +39,7 @@ const Ad = ({ ad }: any) => {
               )}
             </div>
             {ad.price && (
-              <span className="ms-auto rounded-full bg-green-500 px-3 py-0.5 text-xs font-bold text-zinc-50">
+              <span className="ms-auto whitespace-nowrap rounded-full bg-green-500 px-3 py-0.5 text-xs font-bold text-zinc-50">
                 {ad.price} $
               </span>
             )}
