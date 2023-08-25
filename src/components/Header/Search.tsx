@@ -3,7 +3,7 @@ import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useProfileStore, useAdsStore } from "../../store";
-import { Ad, Profile, AdsParser } from "../../interfaces";
+import { Ad, Ads, Profile, AdsParser } from "../../interfaces";
 import { containsTerms } from "../../utils/string";
 import config from "../../config";
 
@@ -17,7 +17,7 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
   const adsStore = useAdsStore();
   const profileStore = useProfileStore();
 
-  const arrayAds: Array<Ad> = [];
+  const arrayAds: Ads = {};
   const arrayIds: Array<string> = [];
 
   const [searchBtnIsActive, setSearchBtnIsActive] = useState(true);
@@ -33,7 +33,7 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     setTimeout(() => setSearchBtnIsActive(true), 5000);
   }
 
-  function registerToStore(ads: Array<Ad>, ids: Array<string>): void {
+  function registerToStore2(ads: Ads, ids: Array<string>): void {
     adsStore.registerAds(ads);
     adsStore.registerIds(ids);
   }
@@ -83,34 +83,19 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
       if (description) ad.description = description;
       if (date) ad.date = date;
       if (price) ad.price = price.split(".")[0];
-      if (category) ad.category = category;
       if (thumbnail) ad.thumbnail = thumbnail;
+      ad.category = category;
 
-      arrayAds.push(ad);
+      if (!arrayAds[category]) arrayAds[category] = [];
+      arrayAds[category].push(ad);
     });
   }
 
   function FetchAds(searchParams: Profile): void {
-    // start: Fake data testing
-    const fakeDataFeeds = true;
-    const fetchPrefix = fakeDataFeeds ? "" : config.CORS_PROXY;
-    const feeds = fakeDataFeeds
-      ? [
-          {
-            checked: true,
-            keyword: "nintendo",
-            url: "data/mocks/k0c623l9001.rss",
-          },
-          {
-            checked: true,
-            keyword: "xbox 360",
-            url: "data/mocks/k0l1700278.rss",
-          },
-        ]
-      : searchParams.feeds;
-    // end: Fake data testing
+    const feeds = searchParams.feeds;
     const fetchPromisses: Promise<string | void>[] = [];
     feeds.map((feed) => {
+      const fetchPrefix = feed.url.startsWith("http") ? config.CORS_PROXY : "";
       fetchPromisses.push(
         fetch(fetchPrefix + feed.url, {})
           .then((response) => response.text())
@@ -127,7 +112,7 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     });
     Promise.all(fetchPromisses).then((values) => {
       setLoading(false);
-      registerToStore(arrayAds, arrayIds);
+      registerToStore2(arrayAds, arrayIds);
     });
   }
 

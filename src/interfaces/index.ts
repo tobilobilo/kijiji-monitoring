@@ -1,6 +1,6 @@
 export interface Feed {
-    url: string;
     keyword: string;
+    url: string;
     checked: boolean;
 }
 
@@ -25,4 +25,8 @@ export interface Ad {
     thumbnail?: string,
     category?: string,
     price?: string,
+}
+
+export interface Ads {
+    [key: string]: Array<Ad>
 }

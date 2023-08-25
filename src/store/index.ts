@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { Profile, Feed, Ad } from "../interfaces";
+import { Profile, Feed, Ad, Ads } from "../interfaces";
 import { readLocalStorage } from "../utils/storage";
+import { mergeWith, isArray } from 'lodash';
 
 interface ProfileStore extends Profile {
     loadProfile: (profile:Profile) => void;
@@ -9,10 +10,10 @@ interface ProfileStore extends Profile {
 }
 
 interface AdsStore {
-    ads: Array<Ad>,
+    ads: Ads;
     ids: Array<string>,
     sortType: number,
-    registerAds: (ads:Array<Ad>) => void;
+    registerAds: (ads:Ads) => void;
     registerIds: (ids:Array<string>) => void;
     setSortType: (type: number) => void;
 }
@@ -43,15 +44,20 @@ export const useProfileStore = create<ProfileStore>((set) => ({
         })),
 }))
 
+function customizer(objValue:Array<Ad>, srcValue:Array<Ad>) {
+    if (isArray(objValue)) {
+      return objValue.concat(srcValue);
+    }
+}
+
 export const useAdsStore = create<AdsStore>((set) => ({
-    ads: [],
+    ads: {},
     ids: [],
     sortType: 0,
-    registerAds: (ads) => 
+    registerAds: (ads) =>  {
         set((state) => ({
-            ...state,
-            ads: [...ads, ...state.ads],
-        })),
+            ads: {...mergeWith(state.ads, ads, customizer)}
+        }))},
     registerIds: (ids) => 
         set((state) => ({
             ...state,

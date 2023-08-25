@@ -11,12 +11,11 @@ interface App {
 }
 
 function App({ loadProfile = false }: App) {
-  const profile = loadProfile
+  const profile = config.DEBUG_MODE
+    ? "debug"
+    : loadProfile
     ? useParams().profileName!
     : config.DEFAULT_PROFILE;
-
-  //const [categoriesProfile, setCategoriesProfile] = useState<Profile>();
-  //const [categoriesCustom, setCategoriesCustom] = useState([]);
 
   const profileStore = useProfileStore();
 

@@ -18,7 +18,7 @@ const Ad = ({ ad }: any) => {
           <img
             src={ad.thumbnail}
             onError={onImageError}
-            className="me-1 block w-28 self-start md:me-2"
+            className="me-1 block w-36 self-start md:me-2"
           />
         )}
         <div className="overflow-hidden px-1 pt-1">

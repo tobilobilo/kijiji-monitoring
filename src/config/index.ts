@@ -1,5 +1,5 @@
 const config = {
-    //CORS_PROXY: "https://thingproxy.freeboard.io/fetch/",
+    DEBUG_MODE: false,
     CORS_PROXY: "https://corsproxy.io/?",
     DEFAULT_PROFILE: "jp",
     AUTOMATIC_TIMER: 60

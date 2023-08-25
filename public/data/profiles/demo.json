@@ -1,23 +1,23 @@
 {
   "feeds": [
     {
-      "url": "https://www.kijiji.ca/rss-srp-autos-camions/quebec/volkswagen-golf/k0c174l9001",
       "keyword": "volkswagen golf",
+      "url": "https://www.kijiji.ca/rss-srp-autos-camions/quebec/volkswagen-golf/k0c174l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-bbq-barbecue/quebec/bbq/k0c678l9001",
       "keyword": "bbq",
+      "url": "https://www.kijiji.ca/rss-srp-bbq-barbecue/quebec/bbq/k0c678l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-achat-et-vente/quebec/telescope/k0c10l9001",
       "keyword": "telescope",
+      "url": "https://www.kijiji.ca/rss-srp-achat-et-vente/quebec/telescope/k0c10l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-achat-et-vente/quebec/trampoline/k0c10l9001",
       "keyword": "trampoline",
+      "url": "https://www.kijiji.ca/rss-srp-achat-et-vente/quebec/trampoline/k0c10l9001",
       "checked": false
     }
   ],

@@ -1,42 +1,42 @@
 {
   "feeds": [
     {
-      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/nintendo/k0c10l9001",
       "keyword": "nintendo",
+      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/nintendo/k0c10l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-jeux-video-vintage/quebec/nintendo-64/k0c623l9001",
       "keyword": "nintendo 64",
+      "url": "https://www.kijiji.ca/rss-srp-jeux-video-vintage/quebec/nintendo-64/k0c623l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-jeux-video-vintage/quebec/gamecube/k0c623l9001",
       "keyword": "gamecube",
+      "url": "https://www.kijiji.ca/rss-srp-jeux-video-vintage/quebec/gamecube/k0c623l9001",
       "checked": true
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-video-games-consoles/quebec/mario/k0c141l9001",
       "keyword": "mario",
+      "url": "https://www.kijiji.ca/rss-srp-video-games-consoles/quebec/mario/k0c141l9001",
       "checked": false
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/sega/k0c10l9001",
       "keyword": "sega",
+      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/sega/k0c10l9001",
       "checked": false
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/jurassic/k0c10l9001",
       "keyword": "jurassic",
+      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/jurassic/k0c10l9001",
       "checked": false
     },
     {
-      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/carte-magic/k0c10l9001",
       "keyword": "carte magic",
+      "url": "https://www.kijiji.ca/rss-srp-buy-sell/quebec/carte-magic/k0c10l9001",
       "checked": false
     },{
-      "url": "https://www.kijiji.ca/rss-srp-old-video-games/quebec/c623l9001",
       "keyword": "Catégorie: Consoles classiques",
+      "url": "https://www.kijiji.ca/rss-srp-old-video-games/quebec/c623l9001",
       "checked": false
     }
   ],
