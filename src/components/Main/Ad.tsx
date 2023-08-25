@@ -1,4 +1,3 @@
-import { Ad as AdType } from "../../interfaces";
 import TimeAgo from "timeago-react";
 import { decode } from "html-entities";
 

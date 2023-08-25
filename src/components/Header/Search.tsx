@@ -110,7 +110,7 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
           })
       );
     });
-    Promise.all(fetchPromisses).then((values) => {
+    Promise.all(fetchPromisses).then(() => {
       setLoading(false);
       registerToStore2(arrayAds, arrayIds);
     });
