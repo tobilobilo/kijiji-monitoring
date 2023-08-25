@@ -1,0 +1,16 @@
+{
+  "feeds": [
+    {
+      "checked": true,
+      "keyword": "nintendo",
+      "url": "data/mocks/k0c623l9001.rss"
+    },
+    {
+      "checked": true,
+      "keyword": "xbox-360",
+      "url": "data/mocks/k0l1700278.rss"
+    }
+  ],
+  "excludedTermsInTitle": [],
+  "excludedTermsInDescription": []
+}
