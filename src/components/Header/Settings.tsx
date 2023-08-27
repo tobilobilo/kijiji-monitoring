@@ -31,6 +31,10 @@ const Settings = ({ menuState }: Menu) => {
     animationDuration: config.AUTOMATIC_TIMER + "s",
   };
 
+  useEffect(() => {
+    setAutomatic(false);
+  }, [profileStore.feeds]);
+
   function toggleAllCheckboxes() {
     const newState = !allCategories;
     const feeds = profileStore.feeds;
