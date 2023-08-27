@@ -21,26 +21,27 @@ const Ad = ({ ad }: any) => {
           />
         )}
         <div className="overflow-hidden px-1 pt-1">
-          <div className="flex flex-row items-start gap-2">
-            <div>
+          <div className="flex flex-col">
+            <div className="flex w-full items-start gap-2">
               {ad.category && (
                 <span className="rounded-full bg-zinc-200 px-3 py-0.5 text-xs font-bold">
                   {ad.category}
                 </span>
               )}
-              {ad.date && (
-                <time
-                  title={ad.date}
-                  className="mt-0.5 block py-0.5 text-xs text-zinc-400"
-                >
-                  <TimeAgo datetime={ad.date} locale="fr" />
-                </time>
+
+              {ad.price && (
+                <span className="ms-auto whitespace-nowrap rounded-full bg-green-500 px-3 py-0.5 text-xs font-bold text-zinc-50">
+                  {ad.price} $
+                </span>
               )}
             </div>
-            {ad.price && (
-              <span className="ms-auto whitespace-nowrap rounded-full bg-green-500 px-3 py-0.5 text-xs font-bold text-zinc-50">
-                {ad.price} $
-              </span>
+            {ad.date && (
+              <time
+                title={ad.date}
+                className="mt-0.5 block py-0.5 text-xs text-zinc-400"
+              >
+                <TimeAgo datetime={ad.date} locale="fr" />
+              </time>
             )}
           </div>
           <div className="relative mt-1.5 max-h-36 min-w-0 overflow-hidden after:absolute after:top-28 after:block after:h-8 after:w-full after:bg-gradient-to-t after:from-white after:transition group-hover:after:from-zinc-100 sm:mt-0.5">
