@@ -11,7 +11,7 @@ const Ad = ({ ad }: any) => {
       <a
         href={ad.link}
         target="_blank"
-        className="group flex max-h-48 overflow-hidden transition duration-200 ease-in-out hover:scale-[1.05] hover:bg-zinc-100 hover:shadow-md"
+        className="group flex max-h-48 w-full overflow-hidden transition duration-200 ease-in-out hover:scale-[1.05] hover:bg-zinc-100 hover:shadow-md"
       >
         {ad.thumbnail && (
           <img
@@ -20,7 +20,7 @@ const Ad = ({ ad }: any) => {
             className="me-1 block w-36 self-start md:me-2"
           />
         )}
-        <div className="overflow-hidden px-1 pt-1">
+        <div className="flex-grow overflow-hidden px-1 pt-1">
           <div className="flex flex-col">
             <div className="flex w-full items-start gap-2">
               {ad.category && (
