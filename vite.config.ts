@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react'
 
 // dans package.json, "homepage": "/kijiji-monitoring/#", sources: https://stackoverflow.com/questions/71984401/react-router-not-working-with-github-pages
@@ -8,4 +8,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: "/kijiji-monitoring",
   plugins: [react()],
+  test: {
+    environment: 'jsdom',
+  },
 })

@@ -8,8 +8,9 @@ export function deleteLocalStorage(name: string) {
     return localStorage.removeItem(name);
 }
 
-export function writeLocalStorageFeed(feed:Feed) {
-    const feeds = JSON.parse(localStorage.getItem("CUSTOM_FEEDS") || "[]");
+export function writeLocalStorageFeed(name: string, feed:Feed) {
+    if(name === "") return false;
+    const feeds = JSON.parse(localStorage.getItem(name) || "[]");
     feeds.push(feed);
-    localStorage.setItem("CUSTOM_FEEDS", JSON.stringify(feeds));
+    localStorage.setItem(name, JSON.stringify(feeds));
 }

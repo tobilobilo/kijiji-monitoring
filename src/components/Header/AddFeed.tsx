@@ -40,7 +40,7 @@ const AddFeed = () => {
       url: feedUrl,
       checked: true,
     };
-    writeLocalStorageFeed(feed);
+    writeLocalStorageFeed("CUSTOM_FEEDS", feed);
     profileStore.addFeed(feed);
   }
 
