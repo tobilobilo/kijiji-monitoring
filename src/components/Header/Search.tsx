@@ -98,7 +98,6 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     feeds.map((feed) => {
       const fetchPrefix = feed.url.startsWith("http") ? config.CORS_PROXY : "";
       const feedCompleteUrl = fetchPrefix + feed.url + "?id=" + uniqid(); // uniqid = prevent caching
-      console.log(feedCompleteUrl);
       fetchPromisses.push(
         fetch(feedCompleteUrl, {})
           .then((response) => response.text())
