@@ -6,6 +6,7 @@ import { useProfileStore, useAdsStore } from "../../store";
 import { Ad, Ads, Profile, AdsParser } from "../../interfaces";
 import { containsTerms } from "../../utils/string";
 import config from "../../config";
+import uniqid from "uniqid";
 
 interface Search {
   iconsClasses?: string;
@@ -96,8 +97,10 @@ const Search = ({ iconsClasses, setLoading, triggerSearch }: Search) => {
     const fetchPromisses: Promise<string | void>[] = [];
     feeds.map((feed) => {
       const fetchPrefix = feed.url.startsWith("http") ? config.CORS_PROXY : "";
+      const feedCompleteUrl = fetchPrefix + feed.url + "?id=" + uniqid(); // uniqid = prevent caching
+      console.log(feedCompleteUrl);
       fetchPromisses.push(
-        fetch(fetchPrefix + feed.url, {})
+        fetch(feedCompleteUrl, {})
           .then((response) => response.text())
           .then((data: string) => {
             parseAds({
